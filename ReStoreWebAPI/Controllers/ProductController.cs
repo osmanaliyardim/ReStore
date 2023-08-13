@@ -5,9 +5,7 @@ using ReStoreWebAPI.Entities;
 
 namespace ReStoreWebAPI.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public class ProductController : ControllerBase
+public class ProductController : BaseApiController
 {
     private readonly StoreContext _storeContext;
 
@@ -28,6 +26,8 @@ public class ProductController : ControllerBase
     public async Task<ActionResult<Product>> GetProduct(int id)
     {
         var product = await _storeContext.Products.FindAsync(id);
+
+        if (product == null) return NotFound();
 
         return Ok(product);
     }

@@ -1,15 +1,21 @@
+import agent from "../../app/api/agent";
+import LoadingComponent from "../../app/layout/LoadingComponent";
 import { Product } from "../../app/models/product";
 import ProductList from "./ProductList";
 import { useEffect, useState } from "react";
 
 export default function Catalog(){
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/product')
-      .then(response => response.json())
-      .then(data => setProducts(data))
-  }, []) // We're adding an empty array to prevent going into endless loop of requests
+    agent.Catalog.list()
+    .then(products => setProducts(products))
+    .catch(error => console.error(error))
+    .finally(() => setLoading(false))
+  }, [])
+
+  if (loading) return <LoadingComponent message="Loading products..."/>
 
   return (
     <>
