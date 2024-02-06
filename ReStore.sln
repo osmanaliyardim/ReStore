@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReStoreWebAPI", "ReStoreWebAPI\ReStoreWebAPI.csproj", "{F14897C6-8A78-4E70-874E-12A2FCCAA3C7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{AE418A96-0C81-4E07-B62E-C81D94DD4834}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{833FA84E-D1F4-4998-94C9-E46C78F84624}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReStoreWebAPI", "Backend\ReStoreWebAPI\ReStoreWebAPI.csproj", "{BD1F3E29-AD60-46F1-9354-7A74AB7E28AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +15,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F14897C6-8A78-4E70-874E-12A2FCCAA3C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F14897C6-8A78-4E70-874E-12A2FCCAA3C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F14897C6-8A78-4E70-874E-12A2FCCAA3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F14897C6-8A78-4E70-874E-12A2FCCAA3C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD1F3E29-AD60-46F1-9354-7A74AB7E28AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD1F3E29-AD60-46F1-9354-7A74AB7E28AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD1F3E29-AD60-46F1-9354-7A74AB7E28AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD1F3E29-AD60-46F1-9354-7A74AB7E28AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD1F3E29-AD60-46F1-9354-7A74AB7E28AA} = {AE418A96-0C81-4E07-B62E-C81D94DD4834}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E7334C4-B8A6-4520-9741-1CADE69D4417}
