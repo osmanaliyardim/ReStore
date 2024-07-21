@@ -29,6 +29,18 @@ export default {
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
+## Components used
+
+1. React
+2. Vite
+3. Material UI
+4. React Router
+5. Redux
+6. Axios
+7. Simple .NET WebApi
+
 ## My personal notes
 
-1. RFC, RCC snippets created under => C:\Users\osman\AppData\Roaming\Code\User\snippets
+1. React is a component-based JavaScript library.
+2. Virtual DOM is a virtualized version of Real DOM.
+3. RFC, RCC snippets created under => C:\Users\osman\AppData\Roaming\Code\User\snippets
