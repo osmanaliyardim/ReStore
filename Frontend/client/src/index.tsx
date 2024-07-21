@@ -5,6 +5,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    {/* This is the highest level component of React (App - App.tsx) */}
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 )
