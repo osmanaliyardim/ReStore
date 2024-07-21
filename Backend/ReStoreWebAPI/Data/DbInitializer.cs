@@ -208,12 +208,12 @@ public static class DbInitializer
                 },
         };
 
-        //context.Products.AddRange(products);
+        context.Products.AddRange(products);
 
-        foreach (var product in products)
-        {
-            context.Products.Add(product);
-        }
+        //foreach (var product in products)
+        //{
+        //    context.Products.Add(product);
+        //}
 
         context.SaveChanges();
     }
