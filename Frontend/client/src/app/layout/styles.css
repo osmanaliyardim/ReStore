@@ -1,0 +1,25 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+thead tr {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #DDD;
+    background-color: lightyellow;
+    font-weight: bolder;
+}
+
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #DDD;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tbody tr:hover {background-color:lightblue;}
