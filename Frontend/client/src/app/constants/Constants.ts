@@ -17,8 +17,16 @@ const REGISTER_ENDPOINT = "Register";
 const PRODUCT_ENDPOINT = "Product/";
 
 /* Error Endpoints */
+const MAIN_ERROR_CONTROLLER = "buggy";
 const SERVER_ERROR_ENDPOINT = "/server-error";
 const NOT_FOUND_ENDPOINT = "/not-found";
+const BAD_REQ_ENDPOINT = "/bad-request";
+const UNAUTHORIZED_ENDPOINT = "/unauthorized";
+const VALIDATION_ERR_ENDPOINT = "/validation-error";
+
+/* Loading Messages */
+const PRODUCTS_LOADING = "Loading products..";
+const PRODUCT_LOADING = "Loading product details..";
 
 const Constants = {
     DOLLAR_SYMBOL,
@@ -36,7 +44,13 @@ const Constants = {
     HOME_ENDPOINT,
     ALL_ENDPOINT,
     LOGIN_ENDPOINT,
-    REGISTER_ENDPOINT
+    REGISTER_ENDPOINT,
+    PRODUCTS_LOADING,
+    PRODUCT_LOADING,
+    MAIN_ERROR_CONTROLLER,
+    BAD_REQ_ENDPOINT,
+    UNAUTHORIZED_ENDPOINT,
+    VALIDATION_ERR_ENDPOINT
 }
 
 export default Constants;

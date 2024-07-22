@@ -3,11 +3,16 @@ import Constants from "../constants/Constants";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
 
+/* To simulate fetching products from remote server */
+const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
+
 axios.defaults.baseURL = Constants.BASE_API_URL;
 
 const responseBody = (response: AxiosResponse) => response.data;
 
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use(async response => {
+    /* To simulate fetching products from remote server */
+    await sleep();
     return response
 }, (error: AxiosError) => {
     const {data, status} = error.response as AxiosResponse;
@@ -53,11 +58,11 @@ const Catalog = {
 }
 
 const TestErrors = {
-    get400Error: () => requests.get('buggy/bad-request').catch(error => console.error(error)),
-    get401Error: () => requests.get('buggy/unauthorized').catch(error => console.error(error)),
-    get404Error: () => requests.get('buggy/not-found').catch(error => console.error(error)),
-    get500Error: () => requests.get('buggy/server-error').catch(error => console.error(error)),
-    getValidationError: () => requests.get('buggy/validation-error'),
+    get400Error: () => requests.get(`${Constants.MAIN_ERROR_CONTROLLER}${Constants.BAD_REQ_ENDPOINT}`).catch(error => console.error(error)),
+    get401Error: () => requests.get(`${Constants.MAIN_ERROR_CONTROLLER}${Constants.UNAUTHORIZED_ENDPOINT}`).catch(error => console.error(error)),
+    get404Error: () => requests.get(`${Constants.MAIN_ERROR_CONTROLLER}${Constants.NOT_FOUND_ENDPOINT}`).catch(error => console.error(error)),
+    get500Error: () => requests.get(`${Constants.MAIN_ERROR_CONTROLLER}${Constants.SERVER_ERROR_ENDPOINT}`).catch(error => console.error(error)),
+    getValidationError: () => requests.get(`${Constants.MAIN_ERROR_CONTROLLER}${Constants.VALIDATION_ERR_ENDPOINT}`),
 }
 
 const agent = {
