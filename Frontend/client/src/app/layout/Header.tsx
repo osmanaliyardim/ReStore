@@ -1,16 +1,17 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import Constants from "../constants/Constants";
 
 const midLinks = [
-  {title: 'catalog', path: '/catalog'},
-  {title: 'about', path: '/about'},
-  {title: 'contact', path: '/contact'},
+  {title: 'catalog', path: '/' + Constants.CATALOGS_ENDPOINT},
+  {title: 'about', path: '/' + Constants.ABOUT_ENDPOINT},
+  {title: 'contact', path: '/' + Constants.CONTACT_ENDPOINT},
 ]
 
 const rightLinks = [
-  {title: 'login', path: '/login'},
-  {title: 'register', path: '/register'}
+  {title: 'login', path: '/'+ Constants.LOGIN_ENDPOINT},
+  {title: 'register', path: '/'+ Constants.REGISTER_ENDPOINT}
 ]
 
 const navStyles = {

@@ -4,6 +4,7 @@ import Constants from '../../app/constants/Constants';
 import { useEffect, useState } from "react";
 import { Product } from "../../app/models/product";
 import agent from "../../app/api/agent";
+import NotFound from "../../app/errors/NotFound";
 
 const ProductDetails = () => {
   const {id} = useParams<{id: string}>();
@@ -18,7 +19,7 @@ const ProductDetails = () => {
   }, [id]);
 
   if (loading) return <h3>Loading..</h3>
-  if (!product) return <h3>Product Not Found</h3>
+  if (!product) return <NotFound/>
 
   return (
     <Grid container spacing={6}>

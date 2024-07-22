@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../layout/App";
 import HomePage from "../../features/home/HomePage";
 import Catalog from "../../features/catalog/Catalog";
@@ -6,6 +6,8 @@ import ProductDetails from "../../features/catalog/ProductDetails";
 import AboutPage from "../../features/about/AboutPage";
 import ContactPage from "../../features/contact/ContactPage";
 import ServerError from "../errors/ServerError";
+import NotFound from "../errors/NotFound";
+import Constants from "../constants/Constants";
 
 
 export const router = createBrowserRouter([
@@ -13,12 +15,14 @@ export const router = createBrowserRouter([
         path: '/',
         element: <App/>,
         children: [
-            {path: '', element: <HomePage/>},
-            {path: 'catalog', element: <Catalog/>},
-            {path: 'catalog/:id', element: <ProductDetails/>},
-            {path: 'about', element: <AboutPage/>},
-            {path: 'contact', element: <ContactPage/>},
-            {path: 'server-error', element: <ServerError/>}
+            {path: Constants.HOME_ENDPOINT, element: <HomePage/>},
+            {path: Constants.CATALOGS_ENDPOINT, element: <Catalog/>},
+            {path: Constants.PRODUCT_ENDPOINT+':id', element: <ProductDetails/>},
+            {path: Constants.ABOUT_ENDPOINT, element: <AboutPage/>},
+            {path: Constants.CONTACT_ENDPOINT, element: <ContactPage/>},
+            {path: Constants.SERVER_ERROR_ENDPOINT, element: <ServerError/>},
+            {path: Constants.NOT_FOUND_ENDPOINT, element: <NotFound/>},
+            {path: Constants.ALL_ENDPOINT, element: <Navigate replace to={Constants.NOT_FOUND_ENDPOINT}/>}
         ]
     }
 ])

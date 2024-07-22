@@ -36,7 +36,7 @@ const ProductCard = ({product}: Props) => {
         </CardContent>
         <CardActions>
           <Button variant="contained" size="small">Add to cart</Button>
-          <Button component={Link} to={`/catalog/${product.id}`} variant="contained" size="small">View</Button>
+          <Button component={Link} to={`/${Constants.PRODUCT_ENDPOINT}${product.id}`} variant="contained" size="small">View</Button>
         </CardActions>
       </Card>
   )
