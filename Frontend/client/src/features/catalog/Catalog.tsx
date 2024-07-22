@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../app/models/product";
 import ProductList from "./ProductList";
-import * as Constants from '../../app/constants/Constants';
+import agent from '../../app/api/agent';
 
 const Catalog = () => {
   const[products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch(Constants.PRODUCTS_API_ENDPOINT)
-      .then(response => response.json())
-      .then(data => setProducts(data))
+    agent.Catalog.list().then(products => setProducts(products))
   }, [])
 
   return (

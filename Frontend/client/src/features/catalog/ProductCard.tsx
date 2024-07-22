@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import { Product } from "../../app/models/product";
-import * as Constants from '../../app/constants/Constants'
+import Constants from '../../app/constants/Constants'
 import { Link } from "react-router-dom";
 
 interface Props {
