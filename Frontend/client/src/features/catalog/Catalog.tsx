@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../app/models/product";
 import ProductList from "./ProductList";
-import * as Constants from '../../app/constants/Constants';
+import agent from '../../app/api/agent';
+import Loading from "../../app/layout/Loading";
+import Constants from "../../app/constants/Constants";
 
 const Catalog = () => {
   const[products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(Constants.PRODUCTS_API_ENDPOINT)
-      .then(response => response.json())
-      .then(data => setProducts(data))
+    agent.Catalog.list()
+      .then(products => setProducts(products))
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false))
   }, [])
+
+  if (loading) return <Loading message={Constants.PRODUCTS_LOADING}/>
 
   return (
   <>

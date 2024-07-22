@@ -1,16 +1,17 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import Constants from "../constants/Constants";
 
 const midLinks = [
-  {title: 'catalog', path: '/catalog'},
-  {title: 'about', path: '/about'},
-  {title: 'contact', path: '/contact'},
+  {title: 'catalog', path: '/' + Constants.CATALOGS_ENDPOINT},
+  {title: 'about', path: '/' + Constants.ABOUT_ENDPOINT},
+  {title: 'contact', path: '/' + Constants.CONTACT_ENDPOINT},
 ]
 
 const rightLinks = [
-  {title: 'login', path: '/login'},
-  {title: 'register', path: '/register'}
+  {title: 'login', path: '/'+ Constants.LOGIN_ENDPOINT},
+  {title: 'register', path: '/'+ Constants.REGISTER_ENDPOINT}
 ]
 
 const navStyles = {
@@ -32,9 +33,7 @@ const Header = ({darkMode, handleThemeChange}: Props) => {
       <Toolbar sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
         
         <Box display="flex" alignItems="center">
-          <Typography variant="h6" component={NavLink} to="/" sx={navStyles}>
-            RE-STORE
-          </Typography>
+          <Avatar alt="Re-Store Logo" src="/public/images/logo.png" component={NavLink} to="/" sx={{navStyles, width: 200, height: 64}} />
 
           <Switch checked={darkMode} onChange={handleThemeChange}/>
         </Box>

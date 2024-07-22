@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import { Product } from "../../app/models/product";
-import * as Constants from '../../app/constants/Constants'
+import Constants from '../../app/constants/Constants'
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -36,7 +36,7 @@ const ProductCard = ({product}: Props) => {
         </CardContent>
         <CardActions>
           <Button variant="contained" size="small">Add to cart</Button>
-          <Button component={Link} to={`/catalog/${product.id}`} variant="contained" size="small">View</Button>
+          <Button component={Link} to={`/${Constants.PRODUCT_ENDPOINT}${product.id}`} variant="contained" size="small">View</Button>
         </CardActions>
       </Card>
   )
