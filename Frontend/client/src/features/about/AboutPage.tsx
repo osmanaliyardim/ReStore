@@ -1,7 +1,16 @@
-import { Button, ButtonGroup, Container, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, ButtonGroup, Container, List, ListItem, ListItemText, Typography } from "@mui/material";
 import agent from "../../app/api/agent";
+import { useState } from "react";
 
 const AboutPage = () => {
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+
+  const getValidationError = () => {
+    agent.TestErrors.getValidationError()
+      .then(() => console.error('should not see this error'))
+      .catch(error => setValidationErrors(error))
+  };
+
   return (
     <Container>
       <Typography gutterBottom variant="h2">Error for testing purposes</Typography>
@@ -10,8 +19,20 @@ const AboutPage = () => {
         <Button variant="contained" onClick={() => agent.TestErrors.get401Error()}>Test 401 Error</Button>
         <Button variant="contained" onClick={() => agent.TestErrors.get404Error()}>Test 404 Error</Button>
         <Button variant="contained" onClick={() => agent.TestErrors.get500Error()}>Test 500 Error</Button>
-        <Button variant="contained" onClick={() => agent.TestErrors.getValidationError()}>Test Validation Error</Button>
+        <Button variant="contained" onClick={getValidationError}>Test Validation Error</Button>
       </ButtonGroup>
+      {validationErrors.length > 0 && 
+        <Alert severity="error">
+          <AlertTitle>Validation Errors</AlertTitle>
+          <List>
+            {validationErrors.map(error => (
+              <ListItem key={error}>
+                <ListItemText>{error}</ListItemText>
+              </ListItem>
+            ))}
+          </List>
+        </Alert>
+      }
     </Container>
   )
 };
