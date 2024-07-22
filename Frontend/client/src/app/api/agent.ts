@@ -1,9 +1,16 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import Constants from "../constants/Constants";
 
 axios.defaults.baseURL = Constants.BASE_API_URL;
 
 const responseBody = (response: AxiosResponse) => response.data;
+
+axios.interceptors.response.use(response => {
+    return response
+}, (error: AxiosError) => {
+    console.error('Caught by Axios Interceptor');
+    return Promise.reject(error.response);
+})
 
 const requests = {
     get: (url: string) => axios.get(url).then(responseBody),
@@ -18,11 +25,11 @@ const Catalog = {
 }
 
 const TestErrors = {
-    get400Error: () => requests.get('buggy/bad-request'),
-    get401Error: () => requests.get('buggy/unauthorized'),
-    get404Error: () => requests.get('buggy/not-found'),
-    get500Error: () => requests.get('buggy/server-error'),
-    getValidationError: () => requests.get('buggy/validation-error'),
+    get400Error: () => requests.get('buggy/bad-request').catch(error => console.error(error)),
+    get401Error: () => requests.get('buggy/unauthorized').catch(error => console.error(error)),
+    get404Error: () => requests.get('buggy/not-found').catch(error => console.error(error)),
+    get500Error: () => requests.get('buggy/server-error').catch(error => console.error(error)),
+    getValidationError: () => requests.get('buggy/validation-error').catch(error => console.error(error)),
 }
 
 const agent = {
