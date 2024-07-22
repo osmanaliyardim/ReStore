@@ -13,7 +13,7 @@ const ProductDetails = () => {
   useEffect(() => {
     id && agent.Catalog.details(parseInt(id))
       .then(product => setProduct(product))
-      .catch(error => console.error(error))
+      .catch(error => console.error(error.response))
       .finally(() => setLoading(false))
   }, [id]);
 
