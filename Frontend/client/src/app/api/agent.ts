@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Constants from "../constants/Constants";
 import { toast } from "react-toastify";
+import { router } from "../router/Routes";
 
 axios.defaults.baseURL = Constants.BASE_API_URL;
 
@@ -31,7 +32,7 @@ axios.interceptors.response.use(response => {
             toast.error(data.title);
             break;
         case 500:
-            toast.error(data.title);
+            router.navigate(Constants.SERVER_ERROR_ENDPOINT, {state: {error: data}})
             break;
         default:
             break;
