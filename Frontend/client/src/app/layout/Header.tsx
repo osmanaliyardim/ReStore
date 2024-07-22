@@ -1,5 +1,5 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Constants from "../constants/Constants";
 
@@ -33,9 +33,7 @@ const Header = ({darkMode, handleThemeChange}: Props) => {
       <Toolbar sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
         
         <Box display="flex" alignItems="center">
-          <Typography variant="h6" component={NavLink} to="/" sx={navStyles}>
-            RE-STORE
-          </Typography>
+          <Avatar alt="Re-Store Logo" src="/public/images/logo.png" component={NavLink} to="/" sx={{navStyles, width: 200, height: 64}} />
 
           <Switch checked={darkMode} onChange={handleThemeChange}/>
         </Box>
