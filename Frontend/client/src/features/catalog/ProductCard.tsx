@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import agent from "../../app/api/agent";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import Utils from "../../app/util/Utils";
 
 interface Props {
     product: Product;
@@ -40,7 +41,7 @@ const ProductCard = ({product}: Props) => {
         />
         <CardContent>
           <Typography gutterBottom color="secondary" variant="h5">
-            {Constants.DOLLAR_SYMBOL} {Constants.priceFixer(product.price)} 
+            {Constants.DOLLAR_SYMBOL} {Utils.fixPrice(product.price)} 
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {product.brand} / {product.type}

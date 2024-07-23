@@ -6,6 +6,7 @@ import { Product } from "../../app/models/product";
 import agent from "../../app/api/agent";
 import NotFound from "../../app/errors/NotFound";
 import Loading from "../../app/layout/Loading";
+import Utils from "../../app/util/Utils";
 
 const ProductDetails = () => {
   const {id} = useParams<{id: string}>();
@@ -30,7 +31,7 @@ const ProductDetails = () => {
       <Grid item xs={6}>
         <Typography variant="h3">{product.name}</Typography>
         <Divider sx={{mb: 2}}/>
-        <Typography variant="h4" color="secondary">{Constants.DOLLAR_SYMBOL} {Constants.priceFixer(product.price)}</Typography>
+        <Typography variant="h4" color="secondary">{Constants.DOLLAR_SYMBOL} {Utils.fixPrice(product.price)}</Typography>
         <TableContainer>
           <Table>
             <TableBody>

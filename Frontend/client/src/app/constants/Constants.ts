@@ -30,15 +30,7 @@ const VALIDATION_ERR_ENDPOINT = "/validation-error";
 const PRODUCTS_LOADING = "Loading products..";
 const PRODUCT_LOADING = "Loading product details..";
 const BASKET_LOADING = "Loading basket..";
-
-/* Constant Functions */
-const priceFixer = (price: number) => {
-    return (price / 100).toFixed(2);
-}
-
-const priceFixerWithQuantity = (price: number, quantity: number) => {
-    return ((price / 100) * quantity).toFixed(2);
-}
+const PROJECT_LOADING = "Initializing the Application..";
 
 const Constants = {
     DOLLAR_SYMBOL,
@@ -65,8 +57,7 @@ const Constants = {
     VALIDATION_ERR_ENDPOINT,
     BASKET_ENDPOINT,
     BASKET_LOADING,
-    priceFixer,
-    priceFixerWithQuantity
+    PROJECT_LOADING
 }
 
 export default Constants;

@@ -5,6 +5,7 @@ import Loading from "../../app/layout/Loading";
 import Constants from "../../app/constants/Constants";
 import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
+import Utils from "../../app/util/Utils";
 
 const BasketPage = () => {
   const [loading, setLoading] = useState(true);
@@ -42,9 +43,9 @@ const BasketPage = () => {
             <TableCell component="th" scope="row">
               {item.name}
             </TableCell>
-            <TableCell align="right">{Constants.DOLLAR_SYMBOL}{Constants.priceFixer(item.price)}</TableCell>
+            <TableCell align="right">{Constants.DOLLAR_SYMBOL}{Utils.fixPrice(item.price)}</TableCell>
             <TableCell align="right">{item.quantity}</TableCell>
-            <TableCell align="right">{Constants.DOLLAR_SYMBOL}{Constants.priceFixerWithQuantity(item.price, item.quantity)}</TableCell>
+            <TableCell align="right">{Constants.DOLLAR_SYMBOL}{Utils.fixPriceWithQuantity(item.price, item.quantity)}</TableCell>
             <TableCell align="right">
               <IconButton color="error">
                 <Delete/>
