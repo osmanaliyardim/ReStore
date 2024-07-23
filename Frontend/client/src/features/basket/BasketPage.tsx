@@ -55,7 +55,7 @@ const BasketPage = () => {
                 <span>{item.name}</span>
               </Box>
             </TableCell>
-            <TableCell align="right">{Constants.DOLLAR_SYMBOL}{Utils.fixPrice(item.price)}</TableCell>
+            <TableCell align="right">{Constants.LOCAL_CURRENCY_SYMBOL}{Utils.fixPrice(item.price)}</TableCell>
             <TableCell align="center">
               <LoadingButton loading={loading} onClick={() => handleRemoveItem(item.productId)} color="error">
                 <Remove/>
@@ -65,7 +65,7 @@ const BasketPage = () => {
                 <Add/>
               </LoadingButton>
             </TableCell>
-            <TableCell align="right">{Constants.DOLLAR_SYMBOL}{Utils.fixPriceWithQuantity(item.price, item.quantity)}</TableCell>
+            <TableCell align="right">{Constants.LOCAL_CURRENCY_SYMBOL}{Utils.fixPriceWithQuantity(item.price, item.quantity)}</TableCell>
             <TableCell align="right">
               <LoadingButton loading={loading} onClick={() => handleRemoveItem(item.productId, item.quantity)} color="error">
                 <Delete/>

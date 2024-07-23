@@ -44,7 +44,7 @@ const ProductCard = ({product}: Props) => {
         />
         <CardContent>
           <Typography gutterBottom color="secondary" variant="h5">
-            {Constants.DOLLAR_SYMBOL} {Utils.fixPrice(product.price)} 
+            {Constants.LOCAL_CURRENCY_SYMBOL} {Utils.fixPrice(product.price)} 
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {product.brand} / {product.type}

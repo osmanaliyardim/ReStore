@@ -1,8 +1,10 @@
 /* Currency Symbols */
-const DOLLAR_SYMBOL = "$"
+const DOLLAR_SYMBOL = "$";
 const TLIRA_SYMBOL = "₺";
 const EURO_SYMBOL = "€";
 const POUND_SYMBOL = "£";
+
+const LOCAL_CURRENCY_SYMBOL = DOLLAR_SYMBOL;
 
 /* Sources: API Endpoints 
 const BASE_API_URL = "https://localhost:5001/api/";*/
@@ -57,7 +59,8 @@ const Constants = {
     VALIDATION_ERR_ENDPOINT,
     BASKET_ENDPOINT,
     BASKET_LOADING,
-    PROJECT_LOADING
+    PROJECT_LOADING,
+    LOCAL_CURRENCY_SYMBOL
 }
 
 export default Constants;
