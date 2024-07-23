@@ -30,7 +30,7 @@ const ProductDetails = () => {
       <Grid item xs={6}>
         <Typography variant="h3">{product.name}</Typography>
         <Divider sx={{mb: 2}}/>
-        <Typography variant="h4" color="secondary">{Constants.DOLLAR_SYMBOL} {(product.price / 100).toFixed(2)}</Typography>
+        <Typography variant="h4" color="secondary">{Constants.DOLLAR_SYMBOL} {Constants.priceFixer(product.price)}</Typography>
         <TableContainer>
           <Table>
             <TableBody>

@@ -4,13 +4,15 @@ const TLIRA_SYMBOL = "₺";
 const EURO_SYMBOL = "€";
 const POUND_SYMBOL = "£";
 
-/* Sources: API Endpoints */
-const BASE_API_URL = "https://localhost:5001/api/";
+/* Sources: API Endpoints 
+const BASE_API_URL = "https://localhost:5001/api/";*/
+const BASE_API_URL = "http://localhost:5000/api/";
 const HOME_ENDPOINT = "";
 const ALL_ENDPOINT = "*";
 const PRODUCTS_ENDPOINT = "Product";
 const CATALOGS_ENDPOINT = "Catalog";
 const CONTACT_ENDPOINT = "Contact";
+const BASKET_ENDPOINT = "Basket";
 const ABOUT_ENDPOINT = "About";
 const LOGIN_ENDPOINT = "Login";
 const REGISTER_ENDPOINT = "Register";
@@ -27,6 +29,16 @@ const VALIDATION_ERR_ENDPOINT = "/validation-error";
 /* Loading Messages */
 const PRODUCTS_LOADING = "Loading products..";
 const PRODUCT_LOADING = "Loading product details..";
+const BASKET_LOADING = "Loading basket..";
+
+/* Constant Functions */
+const priceFixer = (price: number) => {
+    return (price / 100).toFixed(2);
+}
+
+const priceFixerWithQuantity = (price: number, quantity: number) => {
+    return ((price / 100) * quantity).toFixed(2);
+}
 
 const Constants = {
     DOLLAR_SYMBOL,
@@ -50,7 +62,11 @@ const Constants = {
     MAIN_ERROR_CONTROLLER,
     BAD_REQ_ENDPOINT,
     UNAUTHORIZED_ENDPOINT,
-    VALIDATION_ERR_ENDPOINT
+    VALIDATION_ERR_ENDPOINT,
+    BASKET_ENDPOINT,
+    BASKET_LOADING,
+    priceFixer,
+    priceFixerWithQuantity
 }
 
 export default Constants;
