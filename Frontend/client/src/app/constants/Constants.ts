@@ -18,6 +18,7 @@ const BASKET_ENDPOINT = "Basket";
 const ABOUT_ENDPOINT = "About";
 const LOGIN_ENDPOINT = "Login";
 const REGISTER_ENDPOINT = "Register";
+const CHECKOUT_ENDPOINT = "Checkout";
 const PRODUCT_ENDPOINT = "Product/";
 
 /* Error Endpoints */
@@ -70,7 +71,8 @@ const Constants = {
     LOCAL_CURRENCY_SYMBOL,
     QUANTITY_LESS_THAN_1_ERROR,
     QUANTITY_ERROR_DETAILED,
-    QUANTITY_ERROR
+    QUANTITY_ERROR,
+    CHECKOUT_ENDPOINT
 }
 
 export default Constants;

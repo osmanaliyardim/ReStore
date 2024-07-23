@@ -1,5 +1,5 @@
 import Constants from "../../app/constants/Constants";
-import { Box, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import Utils from "../../app/util/Utils";
 import { useStoreContext } from "../../app/context/StoreContext";
@@ -7,6 +7,7 @@ import agent from "../../app/api/agent";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import BasketSummary from "./BasketSummary";
+import { Link } from "react-router-dom";
 
 const BasketPage = () => {
   const {basket, setBasket, removeItem} = useStoreContext();
@@ -85,6 +86,9 @@ const BasketPage = () => {
         <Grid item xs={6}/>
         <Grid item xs={6}>
           <BasketSummary/>
+          <Button component={Link} to="/Checkout" variant="contained" size="large" color="success" fullWidth>
+            Checkout
+          </Button>
         </Grid>
       </Grid>
     </>

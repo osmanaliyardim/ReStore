@@ -9,6 +9,7 @@ import ServerError from "../errors/ServerError";
 import NotFound from "../errors/NotFound";
 import Constants from "../constants/Constants";
 import BasketPage from "../../features/basket/BasketPage";
+import CheckoutPage from "../../features/checkout/CheckoutPage";
 
 
 export const router = createBrowserRouter([
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
             {path: Constants.SERVER_ERROR_ENDPOINT, element: <ServerError/>},
             {path: Constants.NOT_FOUND_ENDPOINT, element: <NotFound/>},
             {path: Constants.BASKET_ENDPOINT, element: <BasketPage/>},
+            {path: Constants.CHECKOUT_ENDPOINT, element: <CheckoutPage/>},
             {path: Constants.ALL_ENDPOINT, element: <Navigate replace to={Constants.NOT_FOUND_ENDPOINT}/>}
         ]
     }
