@@ -28,6 +28,13 @@ const BAD_REQ_ENDPOINT = "/bad-request";
 const UNAUTHORIZED_ENDPOINT = "/unauthorized";
 const VALIDATION_ERR_ENDPOINT = "/validation-error";
 
+/* Error Messages */
+const QUANTITY_LESS_THAN_1_ERROR = "Quantity cannot be less than 1";
+const QUANTITY_ERROR_DETAILED = (productName: string, quantity: number) => {
+    return `The avaible quantity in stock for ${productName} is ${quantity}`;
+}
+const QUANTITY_ERROR = "Quantity cannt be less than 1 and more than in stock";
+
 /* Loading Messages */
 const PRODUCTS_LOADING = "Loading products..";
 const PRODUCT_LOADING = "Loading product details..";
@@ -60,7 +67,10 @@ const Constants = {
     BASKET_ENDPOINT,
     BASKET_LOADING,
     PROJECT_LOADING,
-    LOCAL_CURRENCY_SYMBOL
+    LOCAL_CURRENCY_SYMBOL,
+    QUANTITY_LESS_THAN_1_ERROR,
+    QUANTITY_ERROR_DETAILED,
+    QUANTITY_ERROR
 }
 
 export default Constants;
