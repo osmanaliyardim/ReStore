@@ -7,6 +7,7 @@ import { router } from "../router/Routes";
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 
 axios.defaults.baseURL = Constants.BASE_API_URL;
+axios.defaults.withCredentials = true;
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -65,9 +66,16 @@ const TestErrors = {
     getValidationError: () => requests.get(`${Constants.MAIN_ERROR_CONTROLLER}${Constants.VALIDATION_ERR_ENDPOINT}`),
 }
 
+const Basket = {
+    get: () => requests.get(Constants.BASKET_ENDPOINT),
+    addItem: (productId: number, quantity = 1) => requests.post(`${Constants.BASKET_ENDPOINT}?productId=${productId}&quantity=${quantity}`, {}),
+    removeItem: (productId: number, quantity = 1) => requests.delete(`${Constants.BASKET_ENDPOINT}?productId=${productId}&quantity=${quantity}`)
+}
+
 const agent = {
     Catalog,
-    TestErrors
+    TestErrors,
+    Basket
 }
 
 export default agent;
