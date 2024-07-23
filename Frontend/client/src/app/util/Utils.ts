@@ -1,3 +1,5 @@
+import { Basket } from "../models/basket";
+
 const getCookie = (key: string) => {
     const cookieValue = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
     
@@ -12,10 +14,20 @@ const fixPriceWithQuantity = (price: number, quantity: number) => {
     return ((price / 100) * quantity).toFixed(2);
 }
 
+const calculateFinalPrice = (basket: Basket | null) => {
+    let totalPrice = 0;
+
+    if (basket)
+        totalPrice = basket?.items.reduce((sum, item) => sum + ((item.price / 100) * item.quantity), 0);
+
+    return totalPrice;
+}
+
 const Utils = {
     getCookie,
     fixPrice,
-    fixPriceWithQuantity
+    fixPriceWithQuantity,
+    calculateFinalPrice
 }
 
 export default Utils;
