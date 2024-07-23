@@ -44,3 +44,8 @@ export default {
 1. React is a component-based JavaScript library.
 2. Virtual DOM is a virtualized version of Real DOM.
 3. RFC, RCC snippets created under => C:\Users\osman\AppData\Roaming\Code\User\snippets
+4. We can store our basket in:
+    * LocalStorage (Persistent, Easy acces-updatable from client, Server unaware)
+    * Cookies (Persistent, Sent with every req to/from server, Updated on the server and returned to the client)
+    * Server (Relational db features, Need to update on the server & client, Possible to track events in the basket)
+5. React Context enables us to send our context directly to component that needs it. (Otherwise, it causes unnecessary dependencies, all the way to reach related component)
