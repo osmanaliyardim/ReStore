@@ -65,8 +65,8 @@ const ProductDetails = () => {
   if (!product) return <NotFound/>
   
   let loadingButton;
-  if (item) loadingButton = <LoadingButton disabled={item?.quantity === quantity || !item && quantity === 0} loading={status.includes('pendingRemoveItem'+ product.id)} onClick={() => handleUpdateCart("update")} sx={{height: "55px"}} color="primary" size="large" variant="contained" fullWidth>{"Update Quantity"}</LoadingButton> 
-  else loadingButton = <LoadingButton loading={status.includes('pendingRemoveItem'+ product.id)} onClick={() => handleUpdateCart("add")} sx={{height: "55px"}} color="success" size="large" variant="contained" fullWidth>{"Add to Cart"}</LoadingButton> 
+  if (item) loadingButton = <LoadingButton disabled={item?.quantity === quantity || !item && quantity === 0} loading={status.includes('pending')} onClick={() => handleUpdateCart("update")} sx={{height: "55px"}} color="primary" size="large" variant="contained" fullWidth>{"Update Quantity"}</LoadingButton> 
+  else loadingButton = <LoadingButton loading={status.includes('pending')} onClick={() => handleUpdateCart("add")} sx={{height: "55px"}} color="success" size="large" variant="contained" fullWidth>{"Add to Cart"}</LoadingButton> 
 
   return (
     <Grid container spacing={6}>

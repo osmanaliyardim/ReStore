@@ -12,7 +12,6 @@ const initialState: BasketState = {
     status: 'idle'
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const addBasketItemAsync: AsyncThunk<Basket, {productId: number; quantity?: number;}, any> =
     createAsyncThunk<Basket, {productId: number, quantity?: number}>(
         'basket/addBasketItemAsync',
@@ -25,7 +24,6 @@ export const addBasketItemAsync: AsyncThunk<Basket, {productId: number; quantity
         }
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const removeBasketItemAsync: AsyncThunk<void, {productId: number; quantity: number; name?: string}, any> = 
     createAsyncThunk<void, {productId: number, quantity: number, name?: string}>(
         'basket/removeBasketItemAsync',

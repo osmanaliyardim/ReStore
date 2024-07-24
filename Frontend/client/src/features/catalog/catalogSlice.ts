@@ -5,26 +5,24 @@ import { RootState } from "../../app/store/configureStore";
 
 const productsAdapter = createEntityAdapter<Product>();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const fetchProductsAsync : AsyncThunk<Product[], void, any> = createAsyncThunk<Product[]>(
     'catalog/fetchProductsAsync',
-    async () => {
+    async (_, thunkAPI) => {
         try {
             return await agent.Catalog.list();
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue({error: error.data});
         }
     }
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const fetchProductAsync : AsyncThunk<Product, number, any> = createAsyncThunk<Product, number>(
     'catalog/fetchProductAsync',
-    async (productId) => {
+    async (productId, thunkAPI) => {
         try {
             return await agent.Catalog.details(productId);
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue({error: error.data})
         }
     }
 )
