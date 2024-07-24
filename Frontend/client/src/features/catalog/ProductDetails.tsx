@@ -10,17 +10,17 @@ import Utils from "../../app/util/Utils";
 import { LoadingButton } from "@mui/lab";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
-import { removeItem, setBasket } from "../basket/basketSlice";
+import { addBasketItemAsync, removeBasketItemAsync } from "../basket/basketSlice";
+import { BasketItem } from "../../app/models/basket";
 
 const ProductDetails = () => {
-  const {basket} = useAppSelector(state => state.basket);
+  const {basket, status} = useAppSelector(state => state.basket);
   const dispatch = useAppDispatch();
   const {id} = useParams<{id: string}>();
   const [product, setProduct] = useState<Product |null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(0);
-  const [submitting, setSubmitting] = useState(false);
-  const item = basket?.items.find(i => i.productId === product?.id);
+  const item = basket?.items.find((i: BasketItem) => i.productId === product?.id);
 
   useEffect(() => {
     if (item) setQuantity(item.quantity);
@@ -51,23 +51,16 @@ const ProductDetails = () => {
       toast.warning(Constants.QUANTITY_LESS_THAN_1_ERROR);
       return;
     }
-    setSubmitting(true);
 
     if (!item || quantity > item.quantity) {
       const updatedQuantity = item ? quantity - item.quantity : quantity;
 
-      agent.Basket.addItem(product.id, updatedQuantity)
-        .then(basket => dispatch(setBasket(basket)))
-        .catch(error => console.error(error))
-        .finally(() => setSubmitting(false))
+      dispatch(addBasketItemAsync({productId: product.id, quantity: updatedQuantity}));
     }
     else{
       const updatedQuantity = item.quantity - quantity;
 
-      agent.Basket.removeItem(product.id, updatedQuantity)
-        .then(() => dispatch(removeItem({productId: product.id!, quantity: updatedQuantity})))
-        .catch(error => console.error(error))
-        .finally(() => setSubmitting(false));
+      dispatch(removeBasketItemAsync({productId: product.id, quantity: updatedQuantity}));
     }
   }
 
@@ -75,8 +68,8 @@ const ProductDetails = () => {
   if (!product) return <NotFound/>
   
   let loadingButton;
-  if (item) loadingButton = <LoadingButton disabled={item?.quantity === quantity || !item && quantity === 0} loading={submitting} onClick={() => handleUpdateCart("update")} sx={{height: "55px"}} color="primary" size="large" variant="contained" fullWidth>{"Update Quantity"}</LoadingButton> 
-  else loadingButton = <LoadingButton loading={submitting} onClick={() => handleUpdateCart("add")} sx={{height: "55px"}} color="success" size="large" variant="contained" fullWidth>{"Add to Cart"}</LoadingButton> 
+  if (item) loadingButton = <LoadingButton disabled={item?.quantity === quantity || !item && quantity === 0} loading={status.includes('pendingRemoveItem'+ product.id)} onClick={() => handleUpdateCart("update")} sx={{height: "55px"}} color="primary" size="large" variant="contained" fullWidth>{"Update Quantity"}</LoadingButton> 
+  else loadingButton = <LoadingButton loading={status.includes('pendingRemoveItem'+ product.id)} onClick={() => handleUpdateCart("add")} sx={{height: "55px"}} color="success" size="large" variant="contained" fullWidth>{"Add to Cart"}</LoadingButton> 
 
   return (
     <Grid container spacing={6}>

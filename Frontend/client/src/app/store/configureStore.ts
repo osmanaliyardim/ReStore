@@ -14,5 +14,6 @@ export const store: Store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useAppDispatch = () => useDispatch<any>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
