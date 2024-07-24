@@ -49,3 +49,11 @@ export default {
     * Cookies (Persistent, Sent with every req to/from server, Updated on the server and returned to the client)
     * Server (Relational db features, Need to update on the server & client, Possible to track events in the basket)
 5. React Context enables us to send our context directly to component that needs it. (Otherwise, it causes unnecessary dependencies, all the way to reach related component)
+6. Redux is available for any kind of JS library/framework. Redux is for managing state in an app. 
+    * Contains the app state (store)
+    * One store per app
+    * Each store can have many 'reducers' or 'slices' of state
+    * Redux is the same thing with Context, but it's more powerful and scalable.
+    * One Way Flow of Redux (Store -> Provider -> App -> Components -> Actions -> Reducers [CatalogReducer]-[BasketReducer])
+    * Do not mutate state, reducers must not have side effects, cannot contain non-seriazible values, only 1 store per app
+    * Redux Toolkit simplifies Redux code, optionionated, good defaults for store setup, less boilerplate
