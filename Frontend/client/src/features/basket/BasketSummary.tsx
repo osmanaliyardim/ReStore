@@ -1,10 +1,10 @@
 import { TableContainer, Paper, Table, TableBody, TableRow, TableCell } from "@mui/material";
-import { useStoreContext } from "../../app/context/StoreContext";
 import Utils from "../../app/util/Utils";
 import Constants from "../../app/constants/Constants";
+import { useAppSelector } from "../../app/store/configureStore";
 
 const BasketSummary = () => {
-  const {basket} = useStoreContext();  
+  const {basket} = useAppSelector(store => store.basket);  
   const deliveryFee = 5;
   const subtotal = Utils.calculateFinalPrice(basket);
   const isDeliveryFree = subtotal >= 100 ? true : false;
