@@ -2,8 +2,6 @@ import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, T
 import { useParams } from "react-router-dom";
 import Constants from '../../app/constants/Constants';
 import { ChangeEvent, useEffect, useState } from "react";
-import { Product } from "../../app/models/product";
-import agent from "../../app/api/agent";
 import NotFound from "../../app/errors/NotFound";
 import Loading from "../../app/layout/Loading";
 import Utils from "../../app/util/Utils";
@@ -12,24 +10,23 @@ import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { addBasketItemAsync, removeBasketItemAsync } from "../basket/basketSlice";
 import { BasketItem } from "../../app/models/basket";
+import { fetchProductAsync, productSelectors } from "./catalogSlice";
 
 const ProductDetails = () => {
   const {basket, status} = useAppSelector(state => state.basket);
   const dispatch = useAppDispatch();
   const {id} = useParams<{id: string}>();
-  const [product, setProduct] = useState<Product |null>(null);
-  const [loading, setLoading] = useState(true);
+  const product = useAppSelector(state => productSelectors.selectById(state, +id!));
+  const {status: productStatus} = useAppSelector(state => state.catalog);
   const [quantity, setQuantity] = useState(0);
   const item = basket?.items.find((i: BasketItem) => i.productId === product?.id);
 
   useEffect(() => {
     if (item) setQuantity(item.quantity);
 
-    id && agent.Catalog.details(parseInt(id))
-      .then(product => setProduct(product))
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false))
-  }, [id, item]);
+    if (!product)
+      dispatch(fetchProductAsync(parseInt(id!)));
+  }, [id, item, dispatch, product]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const eventValue = parseInt(event.currentTarget.value);
@@ -64,7 +61,7 @@ const ProductDetails = () => {
     }
   }
 
-  if (loading) return <Loading message={Constants.PRODUCT_LOADING}/>
+  if (productStatus.includes('pending')) return <Loading message={Constants.PRODUCT_LOADING}/>
   if (!product) return <NotFound/>
   
   let loadingButton;
