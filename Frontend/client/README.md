@@ -57,3 +57,4 @@ export default {
     * One Way Flow of Redux (Store -> Provider -> App -> Components -> Actions -> Reducers [CatalogReducer]-[BasketReducer])
     * Do not mutate state, reducers must not have side effects, cannot contain non-seriazible values, only 1 store per app
     * Redux Toolkit simplifies Redux code, optionionated, good defaults for store setup, less boilerplate
+7. ThunkAPI can be used for catching expcetions/errors in AsyncThunkActions.
