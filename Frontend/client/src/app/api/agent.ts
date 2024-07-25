@@ -47,14 +47,14 @@ axios.interceptors.response.use(async response => {
 })
 
 const requests = {
-    get: (url: string) => axios.get(url).then(responseBody),
+    get: (url: string, params?: URLSearchParams) => axios.get(url, {params}).then(responseBody),
     post: (url: string, body: object) => axios.post(url, body).then(responseBody),
     put: (url: string, body: object) => axios.put(url, body).then(responseBody),
     delete: (url: string) => axios.delete(url).then(responseBody)
 };
 
 const Catalog = {
-    list: () => requests.get(Constants.PRODUCTS_ENDPOINT),
+    list: (params: URLSearchParams) => requests.get(Constants.PRODUCTS_ENDPOINT, params),
     details: (id: number) => requests.get(Constants.PRODUCT_ENDPOINT + id),
     fetchFilters: () => requests.get(Constants.PRODUCT_FILTERS_ENDPOINT)
 }
