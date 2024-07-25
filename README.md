@@ -1,5 +1,5 @@
 # ReStore
- E-Commerce store with React App and a simple .NET Web API
+ Real world e-commerce with React, Vite, Material UI, React Router, Redux, Axios and a simple .NET API
 
 ## Techs used
  1. React
