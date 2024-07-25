@@ -55,7 +55,8 @@ const requests = {
 
 const Catalog = {
     list: () => requests.get(Constants.PRODUCTS_ENDPOINT),
-    details: (id: number) => requests.get(Constants.PRODUCT_ENDPOINT + id)
+    details: (id: number) => requests.get(Constants.PRODUCT_ENDPOINT + id),
+    fetchFilters: () => requests.get(Constants.PRODUCT_FILTERS_ENDPOINT)
 }
 
 const TestErrors = {
