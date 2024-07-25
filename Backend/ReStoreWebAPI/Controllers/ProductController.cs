@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ReStoreWebAPI.Data;
 using ReStoreWebAPI.Entities;
+using ReStoreWebAPI.Extensions;
+using ReStoreWebAPI.RequestHelpers;
 
 namespace ReStoreWebAPI.Controllers;
 
@@ -15,9 +17,17 @@ public class ProductController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> GetProducts()
+    public async Task<ActionResult<PagedList<Product>>> GetProducts([FromQuery]ProductParams productParams)
     {
-        var products = await _storeContext.Products.ToListAsync();
+        var query = _storeContext.Products
+            .Search(productParams.SearchParam)
+            .Filter(productParams.Brands, productParams.Types)
+            .Sort(productParams.OrderBy)
+            .AsQueryable();
+
+        var products = await PagedList<Product>.ToPagedList(query, productParams.PageNumber, productParams.PageSize);
+
+        Response.AddPaginationHeader(products.MetaData);
 
         return Ok(products);
     }
@@ -30,5 +40,14 @@ public class ProductController : BaseApiController
         if (product == null) return NotFound();
 
         return Ok(product);
+    }
+
+    [HttpGet("filters")]
+    public async Task<IActionResult> GetFilters()
+    {
+        var brands = await _storeContext.Products.Select(p => p.Brand).Distinct().ToListAsync();
+        var types = await _storeContext.Products.Select(p => p.Type).Distinct().ToListAsync();
+
+        return Ok(new { brands, types });
     }
 }
