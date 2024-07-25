@@ -20,6 +20,7 @@ const LOGIN_ENDPOINT = "Login";
 const REGISTER_ENDPOINT = "Register";
 const CHECKOUT_ENDPOINT = "Checkout";
 const PRODUCT_ENDPOINT = "Product/";
+const PRODUCT_FILTERS_ENDPOINT = "Product/Filters";
 
 /* Error Endpoints */
 const MAIN_ERROR_CONTROLLER = "buggy";
@@ -72,7 +73,8 @@ const Constants = {
     QUANTITY_LESS_THAN_1_ERROR,
     QUANTITY_ERROR_DETAILED,
     QUANTITY_ERROR,
-    CHECKOUT_ENDPOINT
+    CHECKOUT_ENDPOINT,
+    PRODUCT_FILTERS_ENDPOINT
 }
 
 export default Constants;
