@@ -12,8 +12,8 @@ export interface Product {
 export interface ProductParams {
     orderBy: string;
     searchParam?: string;
-    types?: string[];
-    brands?: string[];
+    types: string[];
+    brands: string[];
     pageNumber: number;
     pageSize: number;
 }
