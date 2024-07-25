@@ -4,7 +4,8 @@ import Loading from "../../app/layout/Loading";
 import Constants from "../../app/constants/Constants";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { fetchFiltersAsync, fetchProductsAsync, productSelectors } from "./catalogSlice";
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Pagination, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Pagination, Paper, Radio, RadioGroup, Typography } from "@mui/material";
+import ProductSearch from "./ProductSearch";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -14,14 +15,13 @@ const sortOptions = [
 
 const Catalog = () => {
   const products = useAppSelector(productSelectors.selectAll);
-  const {productLoaded, status, filtersLoaded, brands, types} = useAppSelector(state => state.catalog);
+  const {productsLoaded, status, filtersLoaded, brands, types} = useAppSelector(state => state.catalog);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!productLoaded)
+    if (!productsLoaded)
       dispatch(fetchProductsAsync());
-    
-  }, [dispatch, productLoaded]);
+  }, [productsLoaded, dispatch]);
 
   useEffect(() => {
     if (!filtersLoaded)
@@ -35,7 +35,7 @@ const Catalog = () => {
 
       <Grid item xs={3}>
         <Paper sx={{mb:2}}>
-          <TextField label="Search products" variant="outlined" fullWidth/>
+          <ProductSearch/>
         </Paper>
 
         <Paper sx={{mb:2, p:2}}>
