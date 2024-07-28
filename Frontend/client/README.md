@@ -63,3 +63,8 @@ export default {
     * Page size should be limitied, 
     * Should always be implemented if possible,
     * Implemented with IQuaryable<T> (Deferred Execution): OrderBy, Where, Take, Skip
+9. Benefits of Json Web Token (JWT):
+    * Self-contained - no session to manage
+    * Portable - single token can be used with multiple backends
+    * Mobile friendly - no cookies required
+    * Performance - no need to make DB requests to validate
