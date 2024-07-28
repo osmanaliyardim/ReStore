@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Paper } from '@mui/material';
+import { Divider, Paper } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
@@ -62,12 +62,26 @@ const Login = () => {
             >
               Sign In
             </LoadingButton>
-            <Grid container>
+            <Grid container sx={{ mb: 4 }}>
               <Grid item>
               Don't have an account? &nbsp;
                 <Link to='/register'>
                   {"Sign Up"}
                 </Link>
+              </Grid>
+            </Grid>
+
+            <Divider sx={{ mb: 4 }}/>
+
+            <Grid container>
+              <Grid item>
+                <Typography variant="h3" color="red">
+                  DEMO USERS
+                </Typography>
+                <Typography variant="h4">
+                  demomember - Pass@w0rd
+                  demoadmin - Pass@w0rd
+                </Typography>
               </Grid>
             </Grid>
           </Box>

@@ -3,6 +3,7 @@ import Constants from "../constants/Constants";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
 import { PaginatedResponse } from "../models/pagination";
+import { User } from "../models/user";
 
 /* To simulate fetching products from remote server */
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
@@ -11,6 +12,14 @@ axios.defaults.baseURL = Constants.BASE_API_URL;
 axios.defaults.withCredentials = true;
 
 const responseBody = (response: AxiosResponse) => response.data;
+
+axios.interceptors.request.use(config => {
+    const userJson = localStorage.getItem('user');
+    const user = userJson && JSON.parse(userJson) as User;
+    if (user) config.headers.Authorization = `Bearer ${user.token}`;
+    
+    return config;
+  });
 
 axios.interceptors.response.use(async response => {
     /* To simulate fetching products from remote server */
