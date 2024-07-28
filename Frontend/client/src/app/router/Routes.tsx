@@ -10,6 +10,8 @@ import NotFound from "../errors/NotFound";
 import Constants from "../constants/Constants";
 import BasketPage from "../../features/basket/BasketPage";
 import CheckoutPage from "../../features/checkout/CheckoutPage";
+import Register from "../../features/account/Register";
+import Login from "../../features/account/Login";
 
 
 export const router = createBrowserRouter([
@@ -26,6 +28,8 @@ export const router = createBrowserRouter([
             {path: Constants.NOT_FOUND_ENDPOINT, element: <NotFound/>},
             {path: Constants.BASKET_ENDPOINT, element: <BasketPage/>},
             {path: Constants.CHECKOUT_ENDPOINT, element: <CheckoutPage/>},
+            {path: Constants.LOGIN_ENDPOINT, element: <Login/>},
+            {path: Constants.REGISTER_ENDPOINT, element: <Register/>},
             {path: Constants.ALL_ENDPOINT, element: <Navigate replace to={Constants.NOT_FOUND_ENDPOINT}/>}
         ]
     }
