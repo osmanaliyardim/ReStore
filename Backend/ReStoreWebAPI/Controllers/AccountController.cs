@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ReStoreWebAPI.Data;
 using ReStoreWebAPI.DTOs;
 using ReStoreWebAPI.Entities;
+using ReStoreWebAPI.Extensions;
 using ReStoreWebAPI.Services;
 
 namespace ReStoreWebAPI.Controllers;
@@ -11,11 +14,16 @@ public class AccountController : BaseApiController
 {
     private readonly UserManager<User> _userManager;
     private readonly TokenService _tokenService;
+    private readonly StoreContext _storeContext;
 
-    public AccountController(UserManager<User> userManager, TokenService tokenService)
+    public AccountController(
+        UserManager<User> userManager, 
+        TokenService tokenService,
+        StoreContext storeContext)
     {
         _userManager = userManager;
         _tokenService = tokenService;
+        _storeContext = storeContext;
     }
 
     [HttpPost("login")]
@@ -28,10 +36,24 @@ public class AccountController : BaseApiController
             return Unauthorized();
         }
 
+        var userBasket = await RetrieveBasket(loginDto.UserName);
+        var anonBasket = await RetrieveBasket(Request.Cookies["buyerId"]);
+
+        if (anonBasket != null)
+        {
+            if (userBasket != null)
+                _storeContext.Baskets.Remove(userBasket);
+
+            anonBasket.BuyerId = user.UserName;
+            Response.Cookies.Delete("buyerId");
+            await _storeContext.SaveChangesAsync();
+        }
+
         return new UserDto
         {
             Email = user.Email,
-            Token = await _tokenService.GenerateTokenAsync(user)
+            Token = await _tokenService.GenerateTokenAsync(user),
+            Basket = anonBasket != null ? anonBasket.MapBasketToDto() : userBasket.MapBasketToDto()
         };
     }
 
@@ -68,5 +90,20 @@ public class AccountController : BaseApiController
             Email = user.Email,
             Token = await _tokenService.GenerateTokenAsync(user)
         };
+    }
+
+    private async Task<Basket> RetrieveBasket(string buyerId)
+    {
+        if (string.IsNullOrEmpty(buyerId))
+        {
+            Response.Cookies.Delete("buyerId");
+
+            return null;
+        }
+
+        return await _storeContext.Baskets
+            .Include(basket => basket.Items)
+            .ThenInclude(basket => basket.Product)
+            .FirstOrDefaultAsync(basket => basket.BuyerId == buyerId);
     }
 }
