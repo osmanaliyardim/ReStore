@@ -20,9 +20,17 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 
 builder.Services.AddCors();
 
-builder.Services.AddIdentityCore<User>()
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<StoreContext>();
+builder.Services.AddIdentityCore<User>(opt =>
+{
+    opt.User.RequireUniqueEmail = true;
+    //opt.Password.RequiredLength = 8;
+    //opt.Password.RequiredUniqueChars = 3;
+    //opt.Password.RequireNonAlphanumeric = true;
+    //opt.Password.RequireDigit = true;
+    //opt.Password.RequireLowercase = true;
+    //opt.Password.RequireUppercase = true;
+}).AddRoles<IdentityRole>()
+  .AddEntityFrameworkStores<StoreContext>();
 
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
