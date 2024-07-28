@@ -3,6 +3,7 @@ import { AppBar, Avatar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar
 import { Link, NavLink } from "react-router-dom";
 import Constants from "../constants/Constants";
 import { useAppSelector } from "../store/configureStore";
+import SignedInMenu from "./SignedInMenu";
 
 const midLinks = [
   {title: 'catalog', path: '/' + Constants.CATALOGS_ENDPOINT},
@@ -30,7 +31,8 @@ interface Props {
 
 const Header = ({darkMode, handleThemeChange}: Props) => {
   const {basket} = useAppSelector(state => state.basket);
-  const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0);
+  const {user} = useAppSelector(state => state.account);
+  const itemCount = basket?.items.reduce((sum: any, item: any) => sum + item.quantity, 0);
 
   return (
     <AppBar position="static" sx={{mb: 4}}>
@@ -57,13 +59,16 @@ const Header = ({darkMode, handleThemeChange}: Props) => {
             </Badge>
           </IconButton>
 
-          <List sx={{display: "flex"}}>
-            {rightLinks.map(({title, path}) =>(
-              <ListItem component={NavLink} to={path} key={path} sx={navStyles}>
-                {title.toUpperCase()}
-              </ListItem>
-            ))}
-          </List>
+          {user ? <SignedInMenu/> 
+                : <List sx={{display: "flex"}}>
+                  {rightLinks.map(({title, path}) =>(
+                    <ListItem component={NavLink} to={path} key={path} sx={navStyles}>
+                      {title.toUpperCase()}
+                    </ListItem>
+                  ))}
+          </List>}
+          
+          
         </Box>
 
       </Toolbar>
