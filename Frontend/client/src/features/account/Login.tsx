@@ -16,7 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {register, handleSubmit, formState: {isSubmitting, errors, isValid}} = useForm({
-    mode: "all"
+    mode: "onTouched"
   });
 
   const submitForm = async (data: FieldValues) => {
