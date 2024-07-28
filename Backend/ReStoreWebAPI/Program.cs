@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ReStoreWebAPI.Data;
 using ReStoreWebAPI.Entities;
 using ReStoreWebAPI.Middleware;
+using ReStoreWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,8 @@ builder.Services.AddIdentityCore<User>(opt =>
 
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 

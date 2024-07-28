@@ -18,7 +18,7 @@ public class TokenService
         _configuration = configuration;
     }
 
-    public async Task<string> GenerateToken(User user)
+    public async Task<string> GenerateTokenAsync(User user)
     {
         var claims = new List<Claim>
         {

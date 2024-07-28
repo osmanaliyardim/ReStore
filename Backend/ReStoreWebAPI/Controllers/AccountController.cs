@@ -2,20 +2,23 @@
 using Microsoft.AspNetCore.Mvc;
 using ReStoreWebAPI.DTOs;
 using ReStoreWebAPI.Entities;
+using ReStoreWebAPI.Services;
 
 namespace ReStoreWebAPI.Controllers;
 
 public class AccountController : BaseApiController
 {
     private readonly UserManager<User> _userManager;
+    private readonly TokenService _tokenService;
 
-    public AccountController(UserManager<User> userManager)
+    public AccountController(UserManager<User> userManager, TokenService tokenService)
     {
         _userManager = userManager;
+        _tokenService = tokenService;
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<User>> Login(LoginDto loginDto)
+    public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
         var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
@@ -24,7 +27,11 @@ public class AccountController : BaseApiController
             return Unauthorized();
         }
 
-        return user;
+        return new UserDto
+        {
+            Email = user.Email,
+            Token = await _tokenService.GenerateTokenAsync(user)
+        };
     }
 
     [HttpPost("register")]
