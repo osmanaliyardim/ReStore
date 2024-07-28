@@ -68,3 +68,4 @@ export default {
     * Portable - single token can be used with multiple backends
     * Mobile friendly - no cookies required
     * Performance - no need to make DB requests to validate
+10. There are 3 main types of forms in React (from fastest to slowest) => React Hook Form, Formik and Redux Form
