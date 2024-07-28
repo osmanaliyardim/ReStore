@@ -53,7 +53,7 @@ public class AccountController : BaseApiController
         {
             Email = user.Email,
             Token = await _tokenService.GenerateTokenAsync(user),
-            Basket = anonBasket != null ? anonBasket.MapBasketToDto() : userBasket.MapBasketToDto()
+            Basket = anonBasket != null ? anonBasket.MapBasketToDto() : userBasket?.MapBasketToDto()
         };
     }
 
@@ -85,10 +85,13 @@ public class AccountController : BaseApiController
     {
         var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
+        var userBasket = await RetrieveBasket(User.Identity.Name);
+
         return new UserDto
         {
             Email = user.Email,
-            Token = await _tokenService.GenerateTokenAsync(user)
+            Token = await _tokenService.GenerateTokenAsync(user),
+            Basket = userBasket?.MapBasketToDto()
         };
     }
 
