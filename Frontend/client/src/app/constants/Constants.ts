@@ -9,6 +9,9 @@ const LOCAL_CURRENCY_SYMBOL = DOLLAR_SYMBOL;
 /* Sources: API Endpoints 
 const BASE_API_URL = "https://localhost:5001/api/";*/
 const BASE_API_URL = "http://localhost:5000/api/";
+const LOGIN_API_ENDPOINT = "account/login";
+const REGISTER_API_ENDPOINT = "account/register";
+const CURRENT_USER_API_ENDPOINT = "account/currentUser";
 const HOME_ENDPOINT = "";
 const ALL_ENDPOINT = "*";
 const PRODUCTS_ENDPOINT = "Product";
@@ -74,7 +77,10 @@ const Constants = {
     QUANTITY_ERROR_DETAILED,
     QUANTITY_ERROR,
     CHECKOUT_ENDPOINT,
-    PRODUCT_FILTERS_ENDPOINT
+    PRODUCT_FILTERS_ENDPOINT,
+    LOGIN_API_ENDPOINT,
+    REGISTER_API_ENDPOINT,
+    CURRENT_USER_API_ENDPOINT
 }
 
 export default Constants;
