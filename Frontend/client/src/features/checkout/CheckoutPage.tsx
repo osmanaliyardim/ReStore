@@ -1,9 +1,11 @@
-import { Box, Button, Paper, Step, StepLabel, Stepper, Typography } from "@mui/material";
+import { Avatar, Box, Button, Paper, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { useState } from "react";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { validationSchema } from "./checkoutValidation";
 
 const steps = ['Shipping address', 'Review your order', 'Payment details'];
 
@@ -21,7 +23,10 @@ function getStepContent(step: number) {
 }
 
 const CheckoutPage = () => {
-    const methods = useForm();
+    const methods = useForm({
+      mode: 'all',
+      resolver: yupResolver(validationSchema)
+    });
     const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = (data: FieldValues) => {
@@ -59,6 +64,11 @@ const CheckoutPage = () => {
                             confirmation, and will send you an update when your order has
                             shipped.
                         </Typography>
+                        <Avatar
+                          alt="ReStore Logo"
+                          src="/public/images/logo.png"
+                          sx={{ width: 56, height: 56 }}
+                        />
                     </>
                 ) : (
                     <form onSubmit={methods.handleSubmit(handleNext)}>
@@ -70,6 +80,7 @@ const CheckoutPage = () => {
                                 </Button>
                             )}
                             <Button
+                                disabled={!methods.formState.isValid}
                                 variant="contained"
                                 type="submit"
                                 sx={{mt: 3, ml: 1}}

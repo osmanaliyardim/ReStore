@@ -69,3 +69,4 @@ export default {
     * Mobile friendly - no cookies required
     * Performance - no need to make DB requests to validate
 10. There are 3 main types of forms in React (from fastest to slowest) => React Hook Form, Formik and Redux Form
+11. React Hook Form Resolvers (YUP library) can be used for form validation errors.
