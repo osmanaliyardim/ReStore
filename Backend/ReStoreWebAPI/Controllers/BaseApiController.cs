@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ReStoreWebAPI.Controllers
+namespace ReStoreWebAPI.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class BaseApiController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BaseApiController : ControllerBase
-    {
-    }
+
 }
