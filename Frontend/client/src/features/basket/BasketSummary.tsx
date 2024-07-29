@@ -3,12 +3,17 @@ import Utils from "../../app/util/Utils";
 import Constants from "../../app/constants/Constants";
 import { useAppSelector } from "../../app/store/configureStore";
 
-const BasketSummary = () => {
+interface Props {
+  subtotal?: number;
+}
+
+const BasketSummary = ({subtotal}: Props) => {
   const {basket} = useAppSelector(store => store.basket);  
   const deliveryFee = 5;
-  const subtotal = Utils.calculateFinalPrice(basket);
+  if (subtotal === undefined)
+    subtotal = Utils.calculateFinalPrice(basket);
+    
   const isDeliveryFree = subtotal >= 100 ? true : false;
-  
   const total = isDeliveryFree ? subtotal : (subtotal + deliveryFee);
 
   let deliveryFeeTableCell, deliveryFeeInfoCell;

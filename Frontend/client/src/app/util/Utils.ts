@@ -14,6 +14,17 @@ const fixPriceWithQuantity = (price: number, quantity: number) => {
     return ((price / 100) * quantity).toFixed(2);
 }
 
+const fixDate = (date: string) => {
+    return date.split('T')[0];
+}
+
+const fixDateTime = (date: string) => {
+    const fixedDate = date.split('T')[0];
+    const time = date.split('T')[1].split('.')[0];
+    
+    return fixedDate + ' / ' + time;
+}
+
 const calculateFinalPrice = (basket: Basket | null) => {
     let totalPrice = 0;
 
@@ -27,7 +38,9 @@ const Utils = {
     getCookie,
     fixPrice,
     fixPriceWithQuantity,
-    calculateFinalPrice
+    calculateFinalPrice,
+    fixDate,
+    fixDateTime
 }
 
 export default Utils;

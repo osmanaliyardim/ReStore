@@ -48,6 +48,7 @@ const PRODUCTS_LOADING = "Loading products..";
 const PRODUCT_LOADING = "Loading product details..";
 const BASKET_LOADING = "Loading basket..";
 const PROJECT_LOADING = "Initializing the Application..";
+const ORDER_LOADING = "Loading orders..";
 
 const Constants = {
     DOLLAR_SYMBOL,
@@ -87,6 +88,7 @@ const Constants = {
     ORDERS_ENDPOINT,
     ORDER_ENDPOINT,
     SAVED_ADDRESS_API_ENDPOINT,
+    ORDER_LOADING
 }
 
 export default Constants;
