@@ -6,6 +6,11 @@ import Review from "./Review";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./checkoutValidation";
+import agent from "../../app/api/agent";
+import { useAppDispatch } from "../../app/store/configureStore";
+import { clearBasket } from "../basket/basketSlice";
+import { LoadingButton } from "@mui/lab";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const steps = ['Shipping address', 'Review your order', 'Payment details'];
 
@@ -24,6 +29,9 @@ function getStepContent(step: number) {
 
 const CheckoutPage = () => {
     const [activeStep, setActiveStep] = useState(0);
+    const [orderNumber, setOrderNumber] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch();
 
     const currentValidationSchema = validationSchema[activeStep];
 
@@ -32,11 +40,26 @@ const CheckoutPage = () => {
       resolver: yupResolver(currentValidationSchema)
     });
 
-    const handleNext = (data: FieldValues) => {
-        if (activeStep === 2)
-          console.log(data);
+    const handleNext = async (data: FieldValues) => {
+        const {saveAddress, ...shippingAddress} = data;
 
-        setActiveStep(activeStep + 1);
+        if (activeStep === steps.length - 1) {
+            setLoading(true);
+
+            try {
+                const orderNumber = await agent.Order.create({saveAddress, shippingAddress});
+                setOrderNumber(orderNumber);
+                setActiveStep(activeStep + 1);
+                dispatch(clearBasket());
+                setLoading(false);
+            } catch (error: any) {
+                console.error(error);
+                setLoading(false);
+            }
+        }
+        else {
+            setActiveStep(activeStep + 1);
+        }
     };
 
     const handleBack = () => {
@@ -46,8 +69,8 @@ const CheckoutPage = () => {
     return (
       <FormProvider {...methods}>
         <Paper variant="outlined" sx={{my: {xs: 3, md: 6}, p: {xs: 2, md: 3}}}>
-            <Typography component="h1" variant="h4" align="center">
-                Checkout
+            <Typography component="h1" variant="h2" align="center">
+                CHECKOUT
             </Typography>
             <Stepper activeStep={activeStep} sx={{pt: 3, pb: 5}}>
                 {steps.map((label) => (
@@ -59,19 +82,30 @@ const CheckoutPage = () => {
             <>
                 {activeStep === steps.length ? (
                     <>
+                        <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        >
+                            <CheckCircleIcon color="success"/>
+                            <Typography variant="h4" gutterBottom sx={{mt: 2, color: "green"}}>
+                                Order Successfull
+                            </Typography>
+                        </Box>
+                        
                         <Typography variant="h5" gutterBottom sx={{mt: 2}}>
                             Thank you for your order.
                         </Typography>
                         <Typography variant="subtitle1">
-                            Your order number is #2001539. We have emailed your order
+                            Your order number is <span style={{color: "#2196f3", textDecoration: "underline"}}>{orderNumber}</span>. We have emailed your order
                             confirmation, and will send you an update when your order has
-                            shipped.
+                            shipped!
                         </Typography>  
                         <Box
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
-                        sx={{mt:35}}
+                        sx={{mt:22}}
                         >
                             <Avatar
                             alt="ReStore Logo"
@@ -89,14 +123,15 @@ const CheckoutPage = () => {
                                     Back
                                 </Button>
                             )}
-                            <Button
+                            <LoadingButton
+                                loading={loading}
                                 disabled={!methods.formState.isValid}
                                 variant="contained"
                                 type="submit"
                                 sx={{mt: 3, ml: 1}}
                             >
                                 {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                            </Button>
+                            </LoadingButton>
                         </Box>
                     </form>
                 )}
