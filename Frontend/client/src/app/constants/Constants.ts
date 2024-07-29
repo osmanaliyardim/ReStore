@@ -12,6 +12,7 @@ const BASE_API_URL = "http://localhost:5000/api/";
 const LOGIN_API_ENDPOINT = "account/login";
 const REGISTER_API_ENDPOINT = "account/register";
 const CURRENT_USER_API_ENDPOINT = "account/currentUser";
+const SAVED_ADDRESS_API_ENDPOINT = "account/savedAddress";
 const HOME_ENDPOINT = "";
 const ALL_ENDPOINT = "*";
 const PRODUCTS_ENDPOINT = "Product";
@@ -84,7 +85,8 @@ const Constants = {
     REGISTER_API_ENDPOINT,
     CURRENT_USER_API_ENDPOINT,
     ORDERS_ENDPOINT,
-    ORDER_ENDPOINT
+    ORDER_ENDPOINT,
+    SAVED_ADDRESS_API_ENDPOINT,
 }
 
 export default Constants;

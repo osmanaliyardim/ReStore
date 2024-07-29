@@ -4,7 +4,7 @@ import AppTextInput from "../../app/components/AppTextInput";
 import AppCheckbox from "../../app/components/AppCheckbox";
 
 const PaymentForm = () => {
-  const {control} = useFormContext();
+  const {control, formState} = useFormContext();
 
   return (
     <>
@@ -25,7 +25,7 @@ const PaymentForm = () => {
           <AppTextInput name="cvvOnCard" label="CVV Number on card" control={control}/>
         </Grid>
         <Grid item xs={12}>
-          <AppCheckbox name="saveCard" label="Remember this credit card details for next time" control={control}/>
+          <AppCheckbox disabled={!formState.isDirty} name="saveCard" label="Remember this credit card details for next time" control={control}/>
         </Grid>
       </Grid>
     </>

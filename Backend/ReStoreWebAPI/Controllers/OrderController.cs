@@ -87,9 +87,11 @@ public class OrderController : BaseApiController
 
         if (orderDto.SaveAddress)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+            var user = await _context.Users
+                .Include(u => u.Address)
+                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
-            user.Address = new UserAddress
+            var address = new UserAddress
             {
                 FullName = orderDto.ShippingAddress.FullName,
                 Address1 = orderDto.ShippingAddress.Address1,
@@ -100,7 +102,7 @@ public class OrderController : BaseApiController
                 Country = orderDto.ShippingAddress.Country
             };
 
-            _context.Update(user);
+            user.Address = address;
         }
 
         var result = await _context.SaveChangesAsync() > 0;

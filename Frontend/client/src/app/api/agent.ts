@@ -94,6 +94,7 @@ const Account = {
     login: (values: any) => requests.post(Constants.LOGIN_API_ENDPOINT, values),
     register: (values: any) => requests.post(Constants.REGISTER_API_ENDPOINT, values),
     currentUser: () => requests.get(Constants.CURRENT_USER_API_ENDPOINT),
+    fetchAddress: () => requests.get(Constants.SAVED_ADDRESS_API_ENDPOINT)
 }
 
 const Order = {
