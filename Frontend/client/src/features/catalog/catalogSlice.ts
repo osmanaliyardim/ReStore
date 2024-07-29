@@ -57,7 +57,7 @@ export const fetchProductAsync = createAsyncThunk<Product, number, any>(
     }
 )
 
-export const fetchFiltersAsync = createAsyncThunk<CatalogState, any, any>(
+export const fetchFiltersAsync = createAsyncThunk<CatalogState, void, any>(
     'catalog/fetchFilters',
     async (_, thunkAPI) => {
         try {
