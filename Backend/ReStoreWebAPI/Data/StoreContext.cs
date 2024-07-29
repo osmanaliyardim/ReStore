@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ReStoreWebAPI.Entities;
+using ReStoreWebAPI.Entities.OrderAggregate;
 
 namespace ReStoreWebAPI.Data;
 
@@ -15,6 +16,8 @@ public class StoreContext : IdentityDbContext<User>
     public DbSet<Product> Products { get; set; }
 
     public DbSet<Basket> Baskets { get; set; }
+
+    public DbSet<Order> Orders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
