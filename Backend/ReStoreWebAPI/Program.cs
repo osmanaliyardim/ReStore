@@ -60,7 +60,7 @@ builder.Services.AddIdentityCore<User>(opt =>
     //opt.Password.RequireDigit = true;
     //opt.Password.RequireLowercase = true;
     //opt.Password.RequireUppercase = true;
-}).AddRoles<IdentityRole>()
+}).AddRoles<Role>()
   .AddEntityFrameworkStores<StoreContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

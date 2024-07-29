@@ -12,6 +12,7 @@ const BASE_API_URL = "http://localhost:5000/api/";
 const LOGIN_API_ENDPOINT = "account/login";
 const REGISTER_API_ENDPOINT = "account/register";
 const CURRENT_USER_API_ENDPOINT = "account/currentUser";
+const SAVED_ADDRESS_API_ENDPOINT = "account/savedAddress";
 const HOME_ENDPOINT = "";
 const ALL_ENDPOINT = "*";
 const PRODUCTS_ENDPOINT = "Product";
@@ -24,6 +25,8 @@ const REGISTER_ENDPOINT = "Register";
 const CHECKOUT_ENDPOINT = "Checkout";
 const PRODUCT_ENDPOINT = "Product/";
 const PRODUCT_FILTERS_ENDPOINT = "Product/Filters";
+const ORDERS_ENDPOINT = "Order";
+const ORDER_ENDPOINT = "Order/";
 
 /* Error Endpoints */
 const MAIN_ERROR_CONTROLLER = "buggy";
@@ -45,6 +48,7 @@ const PRODUCTS_LOADING = "Loading products..";
 const PRODUCT_LOADING = "Loading product details..";
 const BASKET_LOADING = "Loading basket..";
 const PROJECT_LOADING = "Initializing the Application..";
+const ORDER_LOADING = "Loading orders..";
 
 const Constants = {
     DOLLAR_SYMBOL,
@@ -80,7 +84,11 @@ const Constants = {
     PRODUCT_FILTERS_ENDPOINT,
     LOGIN_API_ENDPOINT,
     REGISTER_API_ENDPOINT,
-    CURRENT_USER_API_ENDPOINT
+    CURRENT_USER_API_ENDPOINT,
+    ORDERS_ENDPOINT,
+    ORDER_ENDPOINT,
+    SAVED_ADDRESS_API_ENDPOINT,
+    ORDER_LOADING
 }
 
 export default Constants;
