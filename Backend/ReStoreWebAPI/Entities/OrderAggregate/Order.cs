@@ -11,7 +11,7 @@ public class Order
     [Required]
     public ShippingAddress ShippingAddress { get; set; }
 
-    public DateTime Date { get; set; } = DateTime.UtcNow;
+    public DateTime Date { get; set; } = DateTime.Now;
 
     public List<OrderItem> Items { get; set; }
 
