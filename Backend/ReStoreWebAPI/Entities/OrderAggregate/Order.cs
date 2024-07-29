@@ -1,4 +1,6 @@
-﻿namespace ReStoreWebAPI.Entities.OrderAggregate;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ReStoreWebAPI.Entities.OrderAggregate;
 
 public class Order
 {
@@ -6,6 +8,7 @@ public class Order
 
     public string BuyerId { get; set; }
 
+    [Required]
     public ShippingAddress ShippingAddress { get; set; }
 
     public DateTime Date { get; set; } = DateTime.UtcNow;
