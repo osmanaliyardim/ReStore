@@ -1,6 +1,11 @@
-import { Typography, Grid, TextField, FormControlLabel, Checkbox } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
+import { useFormContext } from "react-hook-form";
+import AppTextInput from "../../app/components/AppTextInput";
+import AppCheckbox from "../../app/components/AppCheckbox";
 
 const PaymentForm = () => {
+  const {control} = useFormContext();
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -8,51 +13,19 @@ const PaymentForm = () => {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardName"
-            label="Name on card"
-            fullWidth
-            autoComplete="cc-name"
-            variant="standard"
-          />
+          <AppTextInput name="nameOnCard" label="Name on card" control={control}/>
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardNumber"
-            label="Card number"
-            fullWidth
-            autoComplete="cc-number"
-            variant="standard"
-          />
+          <AppTextInput name="numberOnCard" label="Number on card" control={control}/>
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="expDate"
-            label="Expiry date"
-            fullWidth
-            autoComplete="cc-exp"
-            variant="standard"
-          />
+          <AppTextInput name="dateOnCard" label="Expiry Date on card" control={control}/>
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cvv"
-            label="CVV"
-            helperText="Last three digits on signature strip"
-            fullWidth
-            autoComplete="cc-csc"
-            variant="standard"
-          />
+          <AppTextInput name="cvvOnCard" label="CVV Number on card" control={control}/>
         </Grid>
         <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
-            label="Remember credit card details for next time"
-          />
+          <AppCheckbox name="saveCard" label="Remember this credit card details for next time" control={control}/>
         </Grid>
       </Grid>
     </>
