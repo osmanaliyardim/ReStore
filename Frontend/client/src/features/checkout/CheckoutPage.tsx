@@ -56,19 +56,26 @@ const CheckoutPage = () => {
             <>
                 {activeStep === steps.length ? (
                     <>
-                        <Typography variant="h5" gutterBottom>
+                        <Typography variant="h5" gutterBottom sx={{mt: 2}}>
                             Thank you for your order.
                         </Typography>
                         <Typography variant="subtitle1">
                             Your order number is #2001539. We have emailed your order
                             confirmation, and will send you an update when your order has
                             shipped.
-                        </Typography>
-                        <Avatar
-                          alt="ReStore Logo"
-                          src="/public/images/logo.png"
-                          sx={{ width: 56, height: 56 }}
-                        />
+                        </Typography>  
+                        <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        sx={{mt:35}}
+                        >
+                            <Avatar
+                            alt="ReStore Logo"
+                            src="/public/images/logo.png"
+                            sx={{ bgcolor: "#2196f3", width: 250, height: 96 }}
+                            />
+                        </Box>
                     </>
                 ) : (
                     <form onSubmit={methods.handleSubmit(handleNext)}>
