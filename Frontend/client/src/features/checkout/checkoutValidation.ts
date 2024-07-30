@@ -12,9 +12,6 @@ export const validationSchema = [
     }),
     yup.object(),
     yup.object({
-        nameOnCard: yup.string().required('Name on your card is required'),
-        numberOnCard: yup.string().required('Number on your card is required'),
-        dateOnCard: yup.string().required('Expiry Date on your card is required'),
-        cvvOnCard: yup.string().required('CVV Number on your card is required'),
+        nameOnCard: yup.string().required('Name on your card is required')
     })
 ];

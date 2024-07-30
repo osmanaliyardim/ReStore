@@ -11,27 +11,44 @@ import { useAppDispatch } from "../../app/store/configureStore";
 import { clearBasket } from "../basket/basketSlice";
 import { LoadingButton } from "@mui/lab";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { StripeElementType } from "@stripe/stripe-js";
 
 const steps = ['Shipping address', 'Review your order', 'Payment details'];
-
-function getStepContent(step: number) {
-    switch (step) {
-        case 0:
-            return <AddressForm/>;
-        case 1:
-            return <Review/>;
-        case 2:
-            return <PaymentForm/>;
-        default:
-            throw new Error('Unknown step');
-    }
-}
 
 const CheckoutPage = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [orderNumber, setOrderNumber] = useState(0);
     const [loading, setLoading] = useState(false);
     const dispatch = useAppDispatch();
+    const [cardState, setCardState] = useState<{elementError: {[key in StripeElementType]?: string}}>({elementError: {}});
+    const [cardComplete, setCardComplete] = useState<any>({cardNumber: false, cardExpiry: false, cardCvc: false});
+  
+    const onCardInputChange = (event: any) => {
+      setCardState({
+        ...cardState,
+        elementError: {
+          ...cardState.elementError,
+          [event.elementType]: event.error?.message
+        }
+      })
+      setCardComplete({
+        ...cardComplete, 
+        [event.elementType]: event.complete
+      });
+    }
+
+    const getStepContent = (step: number) => {
+        switch (step) {
+            case 0:
+                return <AddressForm/>;
+            case 1:
+                return <Review/>;
+            case 2:
+                return <PaymentForm cardState={cardState} onCardInputChange={onCardInputChange}/>;
+            default:
+                throw new Error('Unknown step');
+        }
+    }
 
     const currentValidationSchema = validationSchema[activeStep];
 
@@ -74,11 +91,23 @@ const CheckoutPage = () => {
         setActiveStep(activeStep - 1);
     };
 
+    const submitDisabled = () => {
+        if (activeStep === steps.length - 1){
+            return !cardComplete.cardCvc 
+                || !cardComplete.cardExpiry 
+                || !cardComplete.cardNumber 
+                || !methods.formState.isValid;
+        }
+        else {
+            return !methods.formState.isValid;
+        }
+    }
+
     return (
       <FormProvider {...methods}>
         <Paper variant="outlined" sx={{my: {xs: 3, md: 6}, p: {xs: 2, md: 3}}}>
             <Typography component="h1" variant="h2" align="center">
-                CHECKOUT
+                CHECKOUT <span style={{color: "#2196f3", fontSize: 20}}>(via <b>Stripe</b>)</span>
             </Typography>
             <Stepper activeStep={activeStep} sx={{pt: 3, pb: 5}}>
                 {steps.map((label) => (
@@ -133,7 +162,7 @@ const CheckoutPage = () => {
                             )}
                             <LoadingButton
                                 loading={loading}
-                                disabled={!methods.formState.isValid}
+                                disabled={submitDisabled()}
                                 variant="contained"
                                 type="submit"
                                 sx={{mt: 3, ml: 1}}
