@@ -9,11 +9,11 @@ using ReStoreWebAPI.Data;
 
 #nullable disable
 
-namespace ReStoreWebAPI.Migrations
+namespace ReStoreWebAPI.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240729042435_OrderEntityAdded")]
-    partial class OrderEntityAdded
+    [Migration("20240730055001_PaymentIntentAdded")]
+    partial class PaymentIntentAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,6 +139,12 @@ namespace ReStoreWebAPI.Migrations
                     b.Property<string>("BuyerId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Baskets");
@@ -186,6 +192,9 @@ namespace ReStoreWebAPI.Migrations
 
                     b.Property<long>("DeliveryFee")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

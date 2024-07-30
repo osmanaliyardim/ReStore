@@ -8,7 +8,7 @@ using ReStoreWebAPI.Data;
 
 #nullable disable
 
-namespace ReStoreWebAPI.Migrations
+namespace ReStoreWebAPI.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
     partial class StoreContextModelSnapshot : ModelSnapshot
@@ -136,6 +136,12 @@ namespace ReStoreWebAPI.Migrations
                     b.Property<string>("BuyerId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Baskets");
@@ -183,6 +189,9 @@ namespace ReStoreWebAPI.Migrations
 
                     b.Property<long>("DeliveryFee")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
