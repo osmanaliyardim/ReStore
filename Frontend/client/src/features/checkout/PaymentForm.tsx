@@ -1,10 +1,11 @@
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, TextField } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import AppTextInput from "../../app/components/AppTextInput";
-import AppCheckbox from "../../app/components/AppCheckbox";
+import { CardCvcElement, CardExpiryElement, CardNumberElement } from "@stripe/react-stripe-js";
+import { StripeInput } from "./StripeInput";
 
 const PaymentForm = () => {
-  const {control, formState} = useFormContext();
+  const {control} = useFormContext();
 
   return (
     <>
@@ -16,16 +17,53 @@ const PaymentForm = () => {
           <AppTextInput name="nameOnCard" label="Name on card" control={control}/>
         </Grid>
         <Grid item xs={12} md={6}>
-          <AppTextInput name="numberOnCard" label="Number on card" control={control}/>
+          <TextField
+            id="cardNumber"
+            label="Card Number"
+            fullWidth
+            autoComplete="cc-number"
+            variant="outlined"
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardNumberElement
+              }
+            }}
+          />
         </Grid>
         <Grid item xs={12} md={6}>
-          <AppTextInput name="dateOnCard" label="Expiry Date on card" control={control}/>
+          <TextField
+            id="expDate"
+            label="Expiry Date"
+            fullWidth
+            autoComplete="cc-exp"
+            variant="outlined"
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardExpiryElement
+              }
+            }}
+          />
         </Grid>
         <Grid item xs={12} md={6}>
-          <AppTextInput name="cvvOnCard" label="CVV Number on card" control={control}/>
-        </Grid>
-        <Grid item xs={12}>
-          <AppCheckbox disabled={!formState.isDirty} name="saveCard" label="Remember this credit card details for next time" control={control}/>
+          <TextField
+            id="cvv"
+            label="CVV"
+            helperText="Last three digits on signature strip"
+            fullWidth
+            autoComplete="cc-csc"
+            variant="outlined"
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardCvcElement
+              }
+            }}
+          />
         </Grid>
       </Grid>
     </>
