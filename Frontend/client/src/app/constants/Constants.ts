@@ -27,6 +27,7 @@ const PRODUCT_ENDPOINT = "Product/";
 const PRODUCT_FILTERS_ENDPOINT = "Product/Filters";
 const ORDERS_ENDPOINT = "Order";
 const ORDER_ENDPOINT = "Order/";
+const PAYMENT_ENDPOINT = "Payment";
 
 /* Error Endpoints */
 const MAIN_ERROR_CONTROLLER = "buggy";
@@ -49,6 +50,10 @@ const PRODUCT_LOADING = "Loading product details..";
 const BASKET_LOADING = "Loading basket..";
 const PROJECT_LOADING = "Initializing the Application..";
 const ORDER_LOADING = "Loading orders..";
+const CHECKOUT_LOADING = "Loading checkout..";
+
+/* Keys and Connection Variables */
+const STRIPE_PUBLIC_KEY = "pk_test_51Pi8kxGHuZIl8YU58aULKClrDKQ0uyBEihrD7tmVqV18pM1ENiOxGInWA7qIbEreQScUAJng93eSY930Y595Y4Zz001wATl94l";
 
 const Constants = {
     DOLLAR_SYMBOL,
@@ -88,7 +93,10 @@ const Constants = {
     ORDERS_ENDPOINT,
     ORDER_ENDPOINT,
     SAVED_ADDRESS_API_ENDPOINT,
-    ORDER_LOADING
+    ORDER_LOADING,
+    PAYMENT_ENDPOINT,
+    STRIPE_PUBLIC_KEY,
+    CHECKOUT_LOADING
 }
 
 export default Constants;
