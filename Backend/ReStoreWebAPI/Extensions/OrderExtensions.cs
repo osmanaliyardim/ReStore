@@ -17,6 +17,7 @@ public static class OrderExtensions
             DeliveryFee = order.DeliveryFee,
             Subtotal = order.Subtotal,
             Status = order.Status.ToString(),
+            PaymentIntentId = order.PaymentIntentId,
             Items = order.Items.Select(item => new OrderItemDto
             {
                 ProductId = item.ItemOrdered.ProductId,

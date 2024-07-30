@@ -23,4 +23,6 @@ public class OrderDto
     public string Status { get; set; }
 
     public long TotalPrice { get; set; }
+
+    public string PaymentIntentId { get; set; }
 }

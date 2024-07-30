@@ -32,8 +32,6 @@ public class PaymentService
             };
 
             intent = await paymentService.CreateAsync(options);
-            basket.PaymentIntentId = intent.Id;
-            basket.ClientSecret = intent.ClientSecret;
         }
         else
         {
