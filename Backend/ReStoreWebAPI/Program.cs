@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using ReStoreWebAPI.Data;
 using ReStoreWebAPI.Entities;
 using ReStoreWebAPI.Middleware;
+using ReStoreWebAPI.RequestHelpers;
 using ReStoreWebAPI.Services;
 using System.Text;
 
@@ -14,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
