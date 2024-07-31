@@ -22,8 +22,9 @@ axios.interceptors.request.use(config => {
   });
 
 axios.interceptors.response.use(async response => {
-    /* To simulate fetching products from remote server */
-    await sleep();
+    /* To simulate fetching products from remote server on DEV */
+    if (import.meta.env.DEV)
+        await sleep();
 
     const pagination = response.headers['pagination'];
     if (pagination) {

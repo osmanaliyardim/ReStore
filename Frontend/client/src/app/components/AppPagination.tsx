@@ -14,7 +14,7 @@ const AppPagination = ({metaData, onPageChange}: Props) => {
       <Typography>
         Displaying {(currentPage - 1) * pageSize + 1}-{currentPage * pageSize > totalCount ? totalCount : currentPage * pageSize} of {totalCount} items
       </Typography>
-      <Pagination color="secondary" size="large" count={totalPages} page={currentPage} onChange={(e, page) => onPageChange(page)} />
+      <Pagination color="secondary" size="large" count={totalPages} page={currentPage} onChange={(_e, page) => onPageChange(page)} />
     </Box>
   )
 };
