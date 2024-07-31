@@ -14,6 +14,7 @@ public class CreateProductDto
     [Range(100, Double.PositiveInfinity)]
     public long Price { get; set; }
 
+    [Required]
     public IFormFile File { get; set; }
 
     [Required]
