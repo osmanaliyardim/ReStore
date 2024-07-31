@@ -28,6 +28,7 @@ const PRODUCT_FILTERS_ENDPOINT = "Product/Filters";
 const ORDERS_ENDPOINT = "Order";
 const ORDER_ENDPOINT = "Order/";
 const PAYMENT_ENDPOINT = "Payment";
+const INVENTORY_ENDPOINT = "Inventory";
 
 /* Error Endpoints */
 const MAIN_ERROR_CONTROLLER = "buggy";
@@ -43,6 +44,7 @@ const QUANTITY_ERROR_DETAILED = (productName: string, quantity: number) => {
     return `The avaible quantity in stock for ${productName} is ${quantity}`;
 }
 const QUANTITY_ERROR = "Quantity cannt be less than 1 and more than in stock";
+const UNAUTHORIZED_ERROR = "You are not authorized";
 
 /* Loading Messages */
 const PRODUCTS_LOADING = "Loading products..";
@@ -96,7 +98,9 @@ const Constants = {
     ORDER_LOADING,
     PAYMENT_ENDPOINT,
     STRIPE_PUBLIC_KEY,
-    CHECKOUT_LOADING
+    CHECKOUT_LOADING,
+    INVENTORY_ENDPOINT,
+    UNAUTHORIZED_ERROR
 }
 
 export default Constants;

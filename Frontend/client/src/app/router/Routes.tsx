@@ -14,6 +14,7 @@ import Login from "../../features/account/Login";
 import RequireAuth from "./ReqireAuth";
 import OrderPage from "../../features/order/OrderPage";
 import CheckoutWrapper from "../../features/checkout/CheckoutWrapper";
+import Inventory from "../../features/admin/Inventory";
 
 
 export const router = createBrowserRouter([
@@ -21,9 +22,14 @@ export const router = createBrowserRouter([
         path: '/',
         element: <App/>,
         children: [
+            // Authenticated routes
             {element: <RequireAuth/>, children: [
                 {path: Constants.CHECKOUT_ENDPOINT, element: <CheckoutWrapper/>},
-                {path: Constants.ORDERS_ENDPOINT, element: <OrderPage/>},
+                {path: Constants.ORDERS_ENDPOINT, element: <OrderPage/>}
+            ]},
+            // Authorized as Admin routes
+            {element: <RequireAuth roles={['Admin']}/>, children: [
+                {path: Constants.CHECKOUT_ENDPOINT, element: <Inventory/>}
             ]},
             {path: Constants.HOME_ENDPOINT, element: <HomePage/>},
             {path: Constants.CATALOGS_ENDPOINT, element: <Catalog/>},
