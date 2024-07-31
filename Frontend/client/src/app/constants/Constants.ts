@@ -28,6 +28,7 @@ const PRODUCT_FILTERS_ENDPOINT = "Product/Filters";
 const ORDERS_ENDPOINT = "Order";
 const ORDER_ENDPOINT = "Order/";
 const PAYMENT_ENDPOINT = "Payment";
+const INVENTORY_ENDPOINT = "Inventory";
 
 /* Error Endpoints */
 const MAIN_ERROR_CONTROLLER = "buggy";
@@ -96,7 +97,8 @@ const Constants = {
     ORDER_LOADING,
     PAYMENT_ENDPOINT,
     STRIPE_PUBLIC_KEY,
-    CHECKOUT_LOADING
+    CHECKOUT_LOADING,
+    INVENTORY_ENDPOINT
 }
 
 export default Constants;

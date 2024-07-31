@@ -1,14 +1,14 @@
-import { useEffect } from "react";
 import ProductList from "./ProductList";
 import Loading from "../../app/layout/Loading";
 import Constants from "../../app/constants/Constants";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
-import { fetchFiltersAsync, fetchProductsAsync, productSelectors, setPageNumber, setProductParams } from "./catalogSlice";
+import { setPageNumber, setProductParams } from "./catalogSlice";
 import { FormControl, FormLabel, Grid, Paper } from "@mui/material";
 import ProductSearch from "./ProductSearch";
 import RadioButtonGroup from "../../app/components/RadioButtonGroup";
 import CheckBoxButtons from "../../app/components/CheckBoxButtons";
 import AppPagination from "../../app/components/AppPagination";
+import useProducts from "../../app/hooks/useProducts";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -17,19 +17,9 @@ const sortOptions = [
 ]
 
 const Catalog = () => {
-  const products = useAppSelector(productSelectors.selectAll);
-  const {productsLoaded, filtersLoaded, brands, types, productParams, metaData} = useAppSelector(state => state.catalog);
+  const {products, filtersLoaded, brands, types, metaData} = useProducts();
+  const {productParams} = useAppSelector(state => state.catalog);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!productsLoaded)
-      dispatch(fetchProductsAsync());
-  }, [productsLoaded, dispatch]);
-
-  useEffect(() => {
-    if (!filtersLoaded)
-      dispatch(fetchFiltersAsync());
-  }, [dispatch, filtersLoaded]);
  
   if (!filtersLoaded) return <Loading message={Constants.PRODUCTS_LOADING}/>
 
@@ -42,7 +32,7 @@ const Catalog = () => {
         </Paper>
 
         <Paper sx={{mb:2, p:2}}>
-        <FormLabel>Sort by</FormLabel>
+          <FormLabel>Sort by</FormLabel>
           <FormControl>
             <RadioButtonGroup selectedValue={productParams.orderBy} options={sortOptions} onChange={(event) => dispatch(setProductParams({orderBy: event.target.value})) } />
           </FormControl>
