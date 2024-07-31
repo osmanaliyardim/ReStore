@@ -52,6 +52,9 @@ axios.interceptors.response.use(async response => {
         case 401:
             toast.error(data.title);
             break;
+        case 403:
+            toast.error(Constants.UNAUTHORIZED_ERROR);
+            break;
         case 404:
             toast.error(data.title);
             break;

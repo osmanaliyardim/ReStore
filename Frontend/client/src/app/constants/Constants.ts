@@ -44,6 +44,7 @@ const QUANTITY_ERROR_DETAILED = (productName: string, quantity: number) => {
     return `The avaible quantity in stock for ${productName} is ${quantity}`;
 }
 const QUANTITY_ERROR = "Quantity cannt be less than 1 and more than in stock";
+const UNAUTHORIZED_ERROR = "You are not authorized";
 
 /* Loading Messages */
 const PRODUCTS_LOADING = "Loading products..";
@@ -98,7 +99,8 @@ const Constants = {
     PAYMENT_ENDPOINT,
     STRIPE_PUBLIC_KEY,
     CHECKOUT_LOADING,
-    INVENTORY_ENDPOINT
+    INVENTORY_ENDPOINT,
+    UNAUTHORIZED_ERROR
 }
 
 export default Constants;
